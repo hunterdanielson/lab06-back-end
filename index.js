@@ -6,11 +6,11 @@ const express = require('express');
 const cors = require('cors');
 
 // bag of coins that indy uses
-const data = require('./data/weather.json');
+// const data = require('./data/weather.json');
 // we're going to replace this with a fetch to the API
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
