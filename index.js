@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 
 // bag of coins that indy uses
-// const data = require('./data/weather.json');
+const data = require('./data/geo.json');
 // we're going to replace this with a fetch to the API
 
 const app = express();
@@ -17,14 +17,14 @@ app.use(cors());
 function mungeWeather(weatherData) {
   // munge that data
 
-  return mungedData;
+  return weatherData;
 }
 
 app.get('/location', (req, res) => {
 // req will have query parameters and some user data
   try {
-    const mungedResponse = mungeWeather(data);
-    res.json(mungedResponse);
+    const mungedResponse = mungeLocation(data);
+    res.json(data);
   } catch (e) {
     console.error(e);
 
