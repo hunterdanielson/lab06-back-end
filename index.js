@@ -6,13 +6,20 @@ const express = require('express');
 const cors = require('cors');
 
 // bag of coins that indy uses
-const data = require('./data/geo.json');
+const geoData = require('./data/geo.json');
+const weatherData = require('./data/weather.json');
 // we're going to replace this with a fetch to the API
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+
+function mungeGeo(geoData) {
+
+
+  return mungedGeo;
+}
 
 function mungeWeather(weatherData) {
   // munge that data
@@ -23,8 +30,8 @@ function mungeWeather(weatherData) {
 app.get('/location', (req, res) => {
 // req will have query parameters and some user data
   try {
-    const mungedResponse = mungeLocation(data);
-    res.json(data);
+    // const mungedResponse = mungeGeo(data);
+    res.json(geoData);
   } catch (e) {
     console.error(e);
 
@@ -38,16 +45,17 @@ app.get('/location', (req, res) => {
 
 app.get('/weather', (req, res) => {
   // req will have query parameters and some user data
-  res.json([
-    {
-      forecast: 'Partly cloudy until afternoon.',
-      time: 'Mon Jan 01 2001',
-    },
-    {
-      forecast: 'Mostly cloudy in the morning.',
-      time: 'Tue Jan 02 2001',
-    },
-  ]);
+  try {
+    // const mungedResponse = mungeGeo(data);
+    res.json(weatherData);
+  } catch (e) {
+    console.error(e);
+
+    res.json({
+      status: 500,
+      responseText: e,
+    });
+  }
 });
 
 // wildstar matches ANYTHING
